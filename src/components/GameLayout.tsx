@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Map, Users, User, Wifi, WifiOff } from "lucide-react";
+import { Map, Users, User, Wifi, WifiOff, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import MapScreen from "./MapScreen";
 import SocialScreen from "./SocialScreen";
 import ProfileScreen from "./ProfileScreen";
@@ -10,6 +11,7 @@ const GameLayout = () => {
   const [activeTab, setActiveTab] = useState<TabType>("map");
   const [isOnline, setIsOnline] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const navigate = useNavigate();
 
   // Simulate network status
   useEffect(() => {
@@ -60,6 +62,13 @@ const GameLayout = () => {
             <span className="text-sm font-medium">Campus Explorer</span>
           </div>
           <div className="flex items-center gap-2">
+            <button 
+              onClick={() => navigate("/auth")}
+              className="p-1 rounded-md hover:bg-secondary/50 transition-colors"
+              title="Login / Register"
+            >
+              <LogOut className="w-4 h-4 text-muted-foreground" />
+            </button>
             {isOnline ? (
               <Wifi className="w-4 h-4 text-primary" />
             ) : (
